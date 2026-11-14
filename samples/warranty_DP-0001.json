@@ -1,0 +1,8 @@
+{
+  "notice": "FICTIONAL TEST RECORD. No real device, person or company.",
+  "passport": "DP-0001",
+  "issuer": "Fictional Shop B",
+  "warranty_days": 90,
+  "covers": ["display", "battery"],
+  "version": "W-2027-01"
+}

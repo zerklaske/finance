@@ -1,0 +1,13 @@
+{
+  "notice": "FICTIONAL TEST RECORD. No real device, person or company.",
+  "passport": "DP-0001",
+  "model": "TestPhone A",
+  "capacity_gb": 128,
+  "issuer": "Fictional Service Centre A",
+  "inspection_date": "2027-01-15",
+  "method": "Standard visual and functional checklist v1",
+  "display": "original",
+  "camera_test": "passed",
+  "battery_health_observed": "87%",
+  "water_exposure": "unknown"
+}

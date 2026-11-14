@@ -1,0 +1,19 @@
+sequenceDiagram
+    autonumber
+    actor T as Technician (service centre)
+    participant S as Off-chain evidence store
+    participant R as PassportRegistry (local chain)
+    actor Sh as Shop
+    actor B as Buyer
+    Sh->>R: registerPassport(randomId)
+    R-->>Sh: PassportRegistered
+    T->>S: upload signed inspection report
+    S-->>T: keccak256(report)
+    T->>R: addRecord(id, Inspection, hash)
+    R-->>T: RecordAdded #1
+    Sh->>R: addRecord(id, Warranty, hash)
+    B->>S: open passport (QR), download report
+    B->>R: verifyRecord(record 1, hash of file)
+    R-->>B: exists / matches / isCurrent
+    T->>R: supersedeRecord(record 1, newHash)
+    R-->>B: record 1 not current, see record 4
