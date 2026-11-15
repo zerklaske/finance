@@ -17,6 +17,16 @@ function fileHash(name) {
 function step(n, text) {
   console.log(`\n=== Step ${n}: ${text} ===`);
 }
+// The local node returns raw revert data; decode the custom error by name via the ABI.
+function reason(contract, e) {
+  try {
+    // In-process network gives a hex string; a JSON-RPC node gives { message, data }.
+    const data = typeof e.data === "string" ? e.data : e.data?.data;
+    const parsed = contract.interface.parseError(data);
+    if (parsed) return `custom error ${parsed.name}(${parsed.args.join(", ")})`;
+  } catch {}
+  return e.shortMessage || e.message.split("\n")[0];
+}
 function short(addr) {
   return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
 }
@@ -61,7 +71,7 @@ async function main() {
     await registry.connect(shop).addRecord(passportId, RecordType.Repair, inspHash);
     console.log("UNEXPECTED: write succeeded");
   } catch (e) {
-    console.log("Rejected as expected:", e.shortMessage || e.message.split("\n")[0]);
+    console.log("Rejected as expected:", reason(registry, e));
   }
 
   step(7, "Buyer verifies the original report and a tampered copy");
@@ -90,7 +100,7 @@ async function main() {
   try {
     await registry.connect(shop).registerPassport(ethers.hexlify(ethers.randomBytes(32)));
   } catch (e) {
-    console.log("Write while paused rejected:", e.shortMessage || e.message.split("\n")[0]);
+    console.log("Write while paused rejected:", reason(registry, e));
   }
   v = await registry.verifyRecord(4, corrected);
   console.log("Verification while paused -> matches:", v.matches);
