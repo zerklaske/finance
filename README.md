@@ -6,7 +6,7 @@ DevicePass is a hypothetical platform for used-smartphone passports. Shops and r
 
 - Course: Introduction to Finance, Astana IT University, 2026-2027
 - Team: Kudabay Arlan, Zhunisbay Sanzhar, Bakrov Nurzhan, Maratbekov Arslan
-- **Demo video:** [link to the video, access for anyone with the link]
+- **Demo video:** [Watch on Google Drive](https://drive.google.com/file/d/1fXd4VpPFpYmDMZxVbbnIt8z5ked8HCBJ/view?usp=sharing)
 - Testnet contract address: not used (local network only)
 
 ## What the prototype does
